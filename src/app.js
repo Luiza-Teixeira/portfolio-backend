@@ -2,6 +2,12 @@
 import express from "express";
 import cors from "cors";
 import pessoaRoutes from "./routes/pessoaRoutes.js";
+import {
+  formacaoRoutes,
+  experienciaRoutes,
+  projetoRoutes
+} from "./routes/curriculoRoutes.js";
+import protegerEscrita from "./middlewares/protegerEscrita.js";
 
 const app = express();
 
@@ -14,7 +20,11 @@ app.get("/", (req, res) => {
   });
 });
 
+app.use(protegerEscrita);
 app.use("/pessoas", pessoaRoutes);
+app.use("/formacoes", formacaoRoutes);
+app.use("/experiencias", experienciaRoutes);
+app.use("/projetos", projetoRoutes);
 
 app.use((erro, req, res, next) => {
   console.error("Erro interno:", erro);

@@ -5,6 +5,7 @@ import * as controller from "../controllers/pessoaController.js";
 const router = Router();
 
 router.get("/", controller.listar);
+router.get("/:id/curriculo", controller.curriculo);
 router.get("/:id", controller.buscar);
 router.post("/", controller.criar);
 router.put("/:id", controller.atualizar);

@@ -91,3 +91,23 @@ export const excluir = async (req, res) => {
 
   return res.status(204).send();
 };
+
+
+export const curriculo = async (req, res) => {
+  if (!idValido(req.params.id)) {
+    return res.status(400).json({
+      erro: "ID inválido"
+    });
+  }
+
+  const pessoa = await service.buscarCurriculo(req.params.id);
+
+  if (!pessoa) {
+    return res.status(404).json({
+      erro: "Pessoa não encontrada"
+    });
+  }
+
+  return res.status(200).json(pessoa);
+};
+
